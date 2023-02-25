@@ -429,3 +429,9 @@ For iCounter1 = 0 To 3
 Next
 
 End Sub
+    
+On Error Resume Next
+Dim Name As String
+Name = "Mattias"
+
+DoCmd.RunSQL "INSERT INTO Table1 (FirstName, LastName) VALUES('" & Name & "', 'Lindgren');"
