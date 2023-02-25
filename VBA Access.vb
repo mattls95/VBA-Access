@@ -429,9 +429,49 @@ For iCounter1 = 0 To 3
 Next
 
 End Sub
-    
+
+Private Sub Command2_Click()
 On Error Resume Next
 Dim Name As String
 Name = "Mattias"
+End Sub
 
 DoCmd.RunSQL "INSERT INTO Table1 (FirstName, LastName) VALUES('" & Name & "', 'Lindgren');"
+
+Public Sub sendMail()
+
+    Dim myMail      As Outlook.MailItem
+    Dim myOutlApp   As Outlook.Application
+
+    ' Creating an Outlook-Instance and a new Mailitem
+    Set myOutlApp = New Outlook.Application
+    Set myMail = myOutlApp.CreateItem(olMailItem)
+
+    With myMail
+        ' defining the primary recipient
+        .To = "recipient@somewhere.invalid"
+        ' adding a CC-recipient
+        .CC = "other.recipient@somewhere.else.invalid"
+        ' defining a subject for the mail
+        .Subject = "My first mail sent with Outlook-Automation"
+        ' Addimg some body-text to the mail
+        .Body = "Hello dear friend, " & vbCrLf & vbCrLf & _
+                "This is my first mail produced and sent via Outlook-Automation." & vbCrLf & vbCrLf & _
+                "And now I will try add an attachment."
+        ' Adding an attachment from filesystem
+        .Attachments.Add "c:\path\to\a\file.dat"
+
+        ' sending the mail
+        .Send
+        ' You can as well display the generated mail by calling the Display-Method
+        ' of the Mailitem and let the user send it manually later. 
+    End With
+
+    ' terminating the Outlook-Application instance
+    myOutlApp.Quit
+
+    ' Destroy the object variables and free the memory
+    Set myMail = Nothing
+    Set myOutlApp = Nothing
+
+End Sub
