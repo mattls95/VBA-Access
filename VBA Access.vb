@@ -499,4 +499,15 @@ Private Sub UpdateButtonState()
         Command20.Enabled = False
     End If
 End Sub
-
+                
+Private Sub Command18_Click()
+DoCmd.OpenForm "Verify", , , , , , Me.Text6.Value & ";" & Me.Text20.Value
+End Sub
+                
+Private Sub Form_Open(Cancel As Integer)
+    Dim args As Variant
+    args = Split(Me.OpenArgs, ";")
+    Me.Text21.Value = args(0)
+    Me.Text23.Value = args(1)
+End Sub                
+                
