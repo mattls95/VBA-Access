@@ -475,3 +475,28 @@ Public Sub sendMail()
     Set myOutlApp = Nothing
 
 End Sub
+                
+Private Sub Check0_AfterUpdate()
+UpdateButtonState
+End Sub
+Private Sub Check2_AfterUpdate()
+UpdateButtonState
+End Sub
+Private Sub Check4_AfterUpdate()
+UpdateButtonState
+End Sub
+Private Sub Check6_AfterUpdate()
+UpdateButtonState
+End Sub
+Private Sub Check8_AfterUpdate()
+UpdateButtonState
+End Sub
+
+Private Sub UpdateButtonState()
+    If Check0.Value = True And Check2.Value = True And Check4.Value = True And Check6.Value = True And Check8.Value = True Then
+        Command20.Enabled = True
+    Else
+        Command20.Enabled = False
+    End If
+End Sub
+
